@@ -20,13 +20,13 @@ def parsefile (file_path):
     data = pd.DataFrame(ldict, columns =['uid', 'room_id', 'name', 'guard_num'])
     fulldata = pd.concat([fulldata, data])
     
-getfile(241, 10, '0.json')
-getfile(75, 50, '1.json')
-getfile(76, 850, '2.json')
+getfile(241, 10, '220801/0.json')
+getfile(75, 50, '220801/1.json')
+getfile(76, 850, '220801/2.json')
 
-parsefile('0.json')
-parsefile('1.json')
-parsefile('2.json')
+parsefile('220801/0.json')
+parsefile('220801/1.json')
+parsefile('220801/2.json')
 
-with open('full.txt', mode = 'w', encoding = 'utf-8') as loaf:
+with open('220801/full.txt', mode = 'w', encoding = 'utf-8') as loaf:
     loaf.write(str(fulldata))

@@ -19,14 +19,16 @@ def parsefile (file_path):
     ldict = ldict['list']
     data = pd.DataFrame(ldict, columns =['uid', 'room_id', 'name', 'guard_num'])
     fulldata = pd.concat([fulldata, data])
-    
-getfile(241, 10, '220805/0.json')
-getfile(75, 50, '220805/1.json')
-getfile(76, 850, '220805/2.json')
 
-parsefile('220805/0.json')
-parsefile('220805/1.json')
-parsefile('220805/2.json')
+date = '220808/'
 
-with open('220805/full.txt', mode = 'w', encoding = 'utf-8') as loaf:
+getfile(241, 10, date + '0.json')
+getfile(75, 60, date + '1.json')
+getfile(76, 850, date + '2.json')
+
+parsefile(date + '0.json')
+parsefile(date + '1.json')
+parsefile(date + '2.json')
+
+with open(date + 'full.txt', mode = 'w', encoding = 'utf-8') as loaf:
     loaf.write(str(fulldata))

@@ -20,7 +20,7 @@ def parsefile (file_path):
     data = pd.DataFrame(ldict, columns =['uid', 'room_id', 'name', 'guard_num'])
     fulldata = pd.concat([fulldata, data])
 
-date = '220821/'
+date = '220829/'
 
 getfile(241, 10, date + '0.json')
 getfile(75, 100, date + '1.json')

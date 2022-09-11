@@ -2,6 +2,12 @@
 
 A small project fetching and analyzing data about virtual ups in Bilibili.
 
+## Watch this!
+
+<div class="flourish-embed flourish-bar-chart-race" data-src="visualisation/11149344"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+
+this is the visualization of `/vr` project.
+
 ## Folders Brief
 
 ### `/legacy`

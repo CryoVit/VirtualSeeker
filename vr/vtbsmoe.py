@@ -89,7 +89,7 @@ def parsefile (bid):
     with open(str(bid) + '.json', 'rb') as loaf:
         ldict = json.load(loaf)
         data = pd.DataFrame(ldict, columns =['time', 'follower'])
-        newdata = pd.DataFrame(columns = [str(bid)])
+        newdata = pd.DataFrame(columns = ['date', str(bid)])
         # for idx, ln in data.iterrows():
         #     ln['time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(ln['time']) // 1000))
         #     data.iloc[idx] = ln
@@ -100,13 +100,13 @@ def parsefile (bid):
             ln['time'] = cur_str[0:10]
             data.iloc[idx] = ln
             if cur_str[8:10] != last_date:
-                newdata.loc[data.iloc[idx - 1]['time']] = data.iloc[idx - 1]['follower']
+                newdata.loc[len(newdata.index)] = [data.iloc[idx - 1]['time'], data.iloc[idx - 1]['follower']]
                 last_date = cur_str[8:10]
         
         newdata.drop(newdata.index[0], inplace = True)
         # newdata.drop(newdata.index[len(newdata) - 1], inplace = True)
         # newdata.loc[data.iloc[len(data) - 1]['time']] = data.iloc[len(data) - 1]['follower']
-        newdata.to_csv(str(bid) + 'r.csv', index = True)
+        newdata.to_csv(str(bid) + 'r.csv', index = False)
             
 
 for i in range(0, 72):

@@ -1,5 +1,5 @@
-id = (480680646	,
-434334701	,
+id = (434334701	,
+480680646	,
 7706705	,
 14387072	,
 480745939	,
@@ -71,3 +71,29 @@ id = (480680646	,
 1739085910	,
 690608710	,
 )
+
+import pandas as pd
+
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+
+# datalist = []
+
+fulldata = []
+
+def parsefile(bid):
+    global fulldata
+    df = pd.read_csv(str(bid) + 'r.csv')
+    if bid == id[0]:
+        fulldata = df
+    else:
+        fulldata = pd.merge(fulldata, df, on='date', how='outer')
+    # datalist.append(df)
+        
+    
+for i in range(72):
+    parsefile(id[i])
+    print(i)
+    
+# fulldata = pd.concat(datalist, axis = 1)
+fulldata.to_csv('0r.csv', index = False)

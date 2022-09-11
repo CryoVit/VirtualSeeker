@@ -1,4 +1,4 @@
-id = [480680646	,
+id = (480680646	,
 434334701	,
 7706705	,
 14387072	,
@@ -70,7 +70,7 @@ id = [480680646	,
 690608711	,
 1739085910	,
 690608710	,
-]
+)
 
 import requests
 import pandas as pd
@@ -94,24 +94,22 @@ def parsefile (bid):
         #     ln['time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(ln['time']) // 1000))
         #     data.iloc[idx] = ln
         # data.to_csv(str(bid) + '.csv', index = False)
-        # countdown = 0
+        last_date = ''
         for idx, ln in data.iterrows():
-            # countdown -= 1
-            # if countdown > 0:
-            #     continue
             cur_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(int(ln['time']) // 1000))
             ln['time'] = cur_str[0:10]
             data.iloc[idx] = ln
-            if cur_str[11] == '0' and int(cur_str[12]) < 6:
+            if cur_str[8:10] != last_date:
                 newdata.loc[data.iloc[idx - 1]['time']] = data.iloc[idx - 1]['follower']
-                # countdown = 10
-                
-        newdata.drop(newdata.index[len(newdata) - 1], inplace = True)
-        newdata.loc[data.iloc[len(data) - 1]['time']] = data.iloc[len(data) - 1]['follower']
+                last_date = cur_str[8:10]
+        
+        newdata.drop(newdata.index[0], inplace = True)
+        # newdata.drop(newdata.index[len(newdata) - 1], inplace = True)
+        # newdata.loc[data.iloc[len(data) - 1]['time']] = data.iloc[len(data) - 1]['follower']
         newdata.to_csv(str(bid) + 'r.csv', index = True)
             
 
-for i in range(71, 72):
+for i in range(1, 72):
     getfile(id[i])
     parsefile(id[i])
     print(i)
